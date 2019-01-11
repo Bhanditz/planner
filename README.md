@@ -8,7 +8,7 @@
 - run `npm start` to get you plan!
 
 ### CSV example
-`
+```
 task,difficulty
 Task 1,3
 Task 2,1
@@ -21,4 +21,4 @@ Task 8,3
 Task 9,2
 Task 10,1
 Task 11,2
-`
+```
