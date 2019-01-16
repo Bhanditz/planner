@@ -2,10 +2,24 @@
 
 ## Getting started
 
+- create a new file called `.env` from `.env.example` and alter the needed params
+- [ folders name may vary according the `.env` parameter you define, the following instruction are based on the default parameters]
 - create `./output/` folder
 - create the `./output/tasks.csv` file that contains your list of tasks
-- [optionally edit your team velocity within `./config.js`]
 - run `npm start` to get you plan!
+
+### Environment parameters
+
+|  Variable name  	|  Description 	|  Default value	|
+|:-:	|---	|---	|
+|   `SOURCE_PATH`	|   Path to the CSV file 	|   `./source/tasks.csv`	|
+|   `OUTPUT_PATH`	|   Path to the folder in which output files will be written	|   `./output/`	|
+|   `ERROR_FILE_NAME`	|   Error file	|   `./output/error.txt`	|
+|   `SUCCESS_FILE_NAME`	|  Log file for success operations 	|   `./output/success.txt`	|
+|   `TEAM_VELOCITY`	|  The development team velocity	|   `4`	|
+|   `MAX_SPRINT_AMOUNT`	|  The max number of sprint to plan 	|   `50`	|
+|   `SEPARATOR`	|   CSV separator	|   `,`	|
+
 
 ### CSV example
 ```
