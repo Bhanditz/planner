@@ -5,7 +5,11 @@ const {
   SUCCESS_FILE_NAME = "./output/success.txt",
   TEAM_VELOCITY = "4",
   MAX_SPRINT_AMOUNT = "50",
-  SEPARATOR= ","
+  SEPARATOR= ",",
+  DIFFICULTY_COLUMN_NAME = "difficulty",
+  APP_NAME_COLUMN_NAME = "task",
+  PROJECT_START_DAY = "31/01/2019",
+  SPRINT_DAYS_DURATION = "14",
 } = process.env;
 
 module.exports = {
@@ -15,5 +19,9 @@ module.exports = {
   SUCCESS_FILE_NAME,
   TEAM_VELOCITY,
   MAX_SPRINT_AMOUNT,
-  SEPARATOR
+  SEPARATOR,
+  DIFFICULTY_COLUMN_NAME,
+  APP_NAME_COLUMN_NAME,
+  PROJECT_START_DAY,
+  SPRINT_DAYS_DURATION,
 };

@@ -11,21 +11,21 @@ var _ = require("lodash");
 async function processCSV() {
 
   var PATH = path.resolve(config.SOURCE_PATH)
-  console.log(PATH)
+
   return await csv({ delimiter: config.SEPARATOR })
-    .fromFile(config.SOURCE_PATH);
+    .fromFile(PATH);
 }
 
 async function init() {
 
+  console.log(`~~~ Your planning will be ready soon...`)
+
   const tasks = await processCSV();
-
-  console.log("=== PLANNING");
   const planning = utils.calculateSprints({tasks});
-  const sprint2tasks = _.groupBy(planning, "sprint");
-  console.log(sprint2tasks);
 
-  utils.printPlanning({planning: sprint2tasks});
+  utils.printPlanning({planning: planning});
+
+  console.log(`~~~ Your planning is ready! Check ${config.SUCCESS_FILE_NAME}`)
 
 }
 

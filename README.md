@@ -19,7 +19,9 @@
 |   `TEAM_VELOCITY`	|  The development team velocity	|   `4`	|
 |   `MAX_SPRINT_AMOUNT`	|  The max number of sprint to plan 	|   `50`	|
 |   `SEPARATOR`	|   CSV separator	|   `,`	|
-
+|   `DIFFICULTY_COLUMN_NAME`	|   Name of the difficulty column in the CSV	|   `difficulty`	|
+|   `PROJECT_START_DAY`	|   Start day of the first sprint. Format is DD/MM/YYYY	|   `31/01/2019`	|
+|   `SPRINT_DAYS_DURATION`	|   Duration of the sprint in days	|   `14`	|
 
 ### CSV example
 ```

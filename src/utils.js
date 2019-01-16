@@ -2,6 +2,7 @@ var fs = require('fs');
 var config = require("./config.js");
 var rimraf = require("rimraf");
 const _ = require('lodash');
+const moment = require('moment');
 
 function cleanOutputFolder() {
 
@@ -44,7 +45,7 @@ function getAvailableSprint({task, tasks, alreadyVisitedSprints}) {
 function getSprintDifficulty({sprint, tasks}){
   const reducer = (accumulator, currentValue) => {
     if (currentValue.sprint === sprint) {
-      return accumulator + parseInt(currentValue.difficulty);
+      return accumulator + parseFloat(currentValue[config.DIFFICULTY_COLUMN_NAME]);
     }
     return accumulator;
   }
@@ -73,7 +74,7 @@ function calculateSprint({task, tasks}) {
     }
 
     var sprintDifficulty = getSprintDifficulty({sprint, tasks});
-    var totDifficulty = sprintDifficulty + parseInt(task.difficulty);
+    var totDifficulty = sprintDifficulty + parseFloat(task[config.DIFFICULTY_COLUMN_NAME]);
 
     if (totDifficulty <= config.TEAM_VELOCITY) {
       task.sprint = sprint;
@@ -92,17 +93,36 @@ function calculateSprints({tasks}) {
   });
 }
 
+function formatData({date}) {return moment(date).format("LL");}
+
 function printPlanning({planning}) {
+
+    const sprint2tasks = _.groupBy(planning, "sprint");
+    let sprintStart = moment(config.PROJECT_START_DAY, "DD/MM/YYYY");
+
+    // Remove undefined key
+    delete sprint2tasks["undefined"];
+
+    console.log("=== PLANNING");
+    console.log(sprint2tasks);
+
     cleanOutputFolder();
 
     // Print team velocity
     logSuccess(`Team velocity: ${config.TEAM_VELOCITY}`);
     logSuccess("");
 
-    _.forEach(planning, function(value, key) {
-        logSuccess(`- SPRINT: ${key}`);
+    _.forEach(sprint2tasks, function(value, key) {
 
-        _.forEach(value, function({task, difficulty}) {
+        const date = formatData({date: sprintStart});
+        logSuccess(`- SPRINT #${key} starts on ${date}`);
+
+        // Update sprintStart for next sprint
+        sprintStart = sprintStart.add(config.SPRINT_DAYS_DURATION, 'days');
+
+        _.forEach(value, function({
+          [config.APP_NAME_COLUMN_NAME] :task,
+          [config.DIFFICULTY_COLUMN_NAME] : difficulty}) {
             logSuccess(`${task} [${difficulty}]`);
         });
 
@@ -112,9 +132,9 @@ function printPlanning({planning}) {
 }
 
 module.exports = {
-    cleanOutputFolder: cleanOutputFolder,
-    logSuccess: logSuccess,
-    logError: logError,
+    cleanOutputFolder,
+    logSuccess,
+    logError,
     printPlanning,
     calculateSprints
 };
