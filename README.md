@@ -44,24 +44,24 @@ Task 11,2
 ```
 Team velocity: 4
 
-- SPRINT: 1
+- SPRINT #1 starts on January 31, 2019
 Task 1 [3]
 Task 2 [1]
 
-- SPRINT: 2
+- SPRINT #2 starts on February 14, 2019
 Task 3 [1]
 Task 4 [2]
 Task 6 [1]
 
-- SPRINT: 3
+- SPRINT #3 starts on February 28, 2019
 Task 5 [2]
 Task 7 [1]
 Task 10 [1]
 
-- SPRINT: 4
+- SPRINT #4 starts on March 14, 2019
 Task 8 [3]
 
-- SPRINT: 5
+- SPRINT #5 starts on March 28, 2019
 Task 9 [2]
 Task 11 [2]
 
