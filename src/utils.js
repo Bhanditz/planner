@@ -88,17 +88,28 @@ function calculateSprint({task, tasks}) {
 }
 
 function calculateSprints({tasks}) {
-  return tasks.map(task => {
-      return calculateSprint({task, tasks})
-  });
+
+  return tasks
+    .map(task => { return calculateSprint({task, tasks}) })
+    .filter(t => !!t);
 }
 
+function getUnplannedTasks({tasks}) {
+  return tasks.filter(function(p) {
+      return parseFloat(p[config.DIFFICULTY_COLUMN_NAME]) > config.TEAM_VELOCITY;
+  })
+
+}
+function printTask ({ [config.APP_NAME_COLUMN_NAME]: task, [config.DIFFICULTY_COLUMN_NAME]: difficulty}) {
+    logSuccess(`${task} [difficulty ${difficulty}]`);
+}
 function formatData({date}) {return moment(date).format("LL");}
 
-function printPlanning({planning}) {
+function printPlanning({planning, tasks}) {
 
     const sprint2tasks = _.groupBy(planning, "sprint");
     let sprintStart = moment(config.PROJECT_START_DAY, "DD/MM/YYYY");
+    const thereAreUnplannedTasks = planning.length !== tasks.length;
 
     // Remove undefined key
     delete sprint2tasks["undefined"];
@@ -112,6 +123,16 @@ function printPlanning({planning}) {
     logSuccess(`Team velocity: ${config.TEAM_VELOCITY}`);
     logSuccess("");
 
+    // Print warning if there are unplanned tasks
+    if (thereAreUnplannedTasks) {
+      logSuccess(`WARNING!`);
+      logSuccess(`The following tasks could not be planned. (Task difficulty > Team velocity)`);
+      const unplanned = getUnplannedTasks({tasks});
+      unplanned.forEach(printTask);
+      logSuccess(`WARNING!`);
+      logSuccess("");
+    }
+
     _.forEach(sprint2tasks, function(value, key) {
 
         const date = formatData({date: sprintStart});
@@ -120,11 +141,7 @@ function printPlanning({planning}) {
         // Update sprintStart for next sprint
         sprintStart = sprintStart.add(config.SPRINT_DAYS_DURATION, 'days');
 
-        _.forEach(value, function({
-          [config.APP_NAME_COLUMN_NAME] :task,
-          [config.DIFFICULTY_COLUMN_NAME] : difficulty}) {
-            logSuccess(`${task} [${difficulty}]`);
-        });
+        _.forEach(value, printTask);
 
         logSuccess("");
     });

@@ -23,9 +23,9 @@ async function init() {
   const tasks = await processCSV();
   const planning = utils.calculateSprints({tasks});
 
-  utils.printPlanning({planning: planning});
+  utils.printPlanning({planning: planning, tasks});
 
-  console.log(`~~~ Your planning is ready! Check ${config.SUCCESS_FILE_NAME}`)
+  console.log(`~~~ Hurray! Check ${config.SUCCESS_FILE_NAME} out`)
 
 }
 

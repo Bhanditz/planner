@@ -26,7 +26,7 @@
 ### CSV example
 ```
 task,difficulty
-Task 1,3
+Task 1,10
 Task 2,1
 Task 3,1
 Task 4,2
@@ -44,25 +44,27 @@ Task 11,2
 ```
 Team velocity: 4
 
+WARNING!
+The following tasks could not be planned. (Task difficulty > Team velocity)
+Task 1 [difficulty 10]
+WARNING!
+
 - SPRINT #1 starts on January 31, 2019
-Task 1 [3]
-Task 2 [1]
+Task 2 [difficulty 1]
+Task 3 [difficulty 1]
+Task 4 [difficulty 2]
 
 - SPRINT #2 starts on February 14, 2019
-Task 3 [1]
-Task 4 [2]
-Task 6 [1]
+Task 5 [difficulty 2]
+Task 6 [difficulty 1]
+Task 7 [difficulty 1]
 
 - SPRINT #3 starts on February 28, 2019
-Task 5 [2]
-Task 7 [1]
-Task 10 [1]
+Task 8 [difficulty 3]
+Task 10 [difficulty 1]
 
 - SPRINT #4 starts on March 14, 2019
-Task 8 [3]
-
-- SPRINT #5 starts on March 28, 2019
-Task 9 [2]
-Task 11 [2]
+Task 9 [difficulty 2]
+Task 11 [difficulty 2]
 
 ```
