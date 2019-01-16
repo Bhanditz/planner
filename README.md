@@ -8,6 +8,11 @@
 - create the `./output/tasks.csv` file that contains your list of tasks
 - run `npm start` to get you plan!
 
+### Considerations on the CSV
+- The tasks contained within the CSV have to be sorted by priority
+- Most important tasks have to be placed as first rows of the CSV
+- The algorithm will assign tasks according to the CSV order
+
 ### Environment parameters
 
 |  Variable name  	|  Description 	|  Default value	|
@@ -39,7 +44,7 @@ Task 10,1
 Task 11,2
 ```
 
-### Output example
+### Report example
 
 ```
 Team velocity: 4
