@@ -10,6 +10,7 @@ const {
   APP_NAME_COLUMN_NAME = "task",
   PROJECT_START_DAY = "31/01/2019",
   SPRINT_DAYS_DURATION = "14",
+  FREE_TIME_PER_SPRINT = 10
 } = process.env;
 
 module.exports = {
@@ -24,4 +25,5 @@ module.exports = {
   APP_NAME_COLUMN_NAME,
   PROJECT_START_DAY,
   SPRINT_DAYS_DURATION,
+  FREE_TIME_PER_SPRINT,
 };

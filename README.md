@@ -27,6 +27,7 @@
 |   `DIFFICULTY_COLUMN_NAME`	|   Name of the difficulty column in the CSV	|   `difficulty`	|
 |   `PROJECT_START_DAY`	|   Start day of the first sprint. Format is DD/MM/YYYY	|   `31/01/2019`	|
 |   `SPRINT_DAYS_DURATION`	|   Duration of the sprint in days	|   `14`	|
+|   `FREE_TIME_PER_SPRINT`	|   Voluntary unallocated time per sprint. Useful when you want to reserver time in the sprint to study, refactor, review, etc.	|   `0`	|
 
 ### CSV example
 ```
@@ -48,9 +49,10 @@ Task 11,2
 
 ```
 Team velocity: 4
+Voluntary free time per sprint: 1
 
 WARNING!
-The following tasks could not be planned. (Task difficulty > Team velocity)
+The following tasks could not be planned. [Task difficulty > (Team velocity - Free time per sprint)]
 Task 1 [difficulty 10]
 WARNING!
 

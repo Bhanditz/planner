@@ -50,7 +50,7 @@ function getSprintDifficulty({sprint, tasks}){
     return accumulator;
   }
 
-  return tasks.reduce(reducer, 0);
+  return tasks.reduce(reducer, parseFloat(config.FREE_TIME_PER_SPRINT));
 }
 
 function arrayContains(array, item) {
@@ -121,12 +121,15 @@ function printPlanning({planning, tasks}) {
 
     // Print team velocity
     logSuccess(`Team velocity: ${config.TEAM_VELOCITY}`);
+    if (parseFloat(config.FREE_TIME_PER_SPRINT) > 0){
+      logSuccess(`Voluntary free time per sprint: ${config.FREE_TIME_PER_SPRINT}`);
+    }
     logSuccess("");
 
     // Print warning if there are unplanned tasks
     if (thereAreUnplannedTasks) {
       logSuccess(`WARNING!`);
-      logSuccess(`The following tasks could not be planned. (Task difficulty > Team velocity)`);
+      logSuccess(`The following tasks could not be planned. [Task difficulty > (Team velocity - Free time per sprint)]`);
       const unplanned = getUnplannedTasks({tasks});
       unplanned.forEach(printTask);
       logSuccess(`WARNING!`);
