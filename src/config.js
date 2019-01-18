@@ -2,7 +2,7 @@ const {
   SOURCE_PATH = "./source/tasks.csv",
   OUTPUT_PATH = "./output/",
   ERROR_FILE_NAME = "./output/error.txt",
-  SUCCESS_FILE_NAME = "./output/success.txt",
+  PLANNING_FILE_NAME = "./output/planning.txt",
   TEAM_VELOCITY = "4",
   MAX_SPRINT_AMOUNT = "50",
   SEPARATOR= ",",
@@ -10,14 +10,15 @@ const {
   APP_NAME_COLUMN_NAME = "task",
   PROJECT_START_DAY = "31/01/2019",
   SPRINT_DAYS_DURATION = "14",
-  FREE_TIME_PER_SPRINT = 10
+  FREE_TIME_PER_SPRINT = 10,
+  SPLIT_BIG_TASKS = true,
 } = process.env;
 
 module.exports = {
   SOURCE_PATH,
   OUTPUT_PATH,
   ERROR_FILE_NAME,
-  SUCCESS_FILE_NAME,
+  PLANNING_FILE_NAME,
   TEAM_VELOCITY,
   MAX_SPRINT_AMOUNT,
   SEPARATOR,
@@ -26,4 +27,5 @@ module.exports = {
   PROJECT_START_DAY,
   SPRINT_DAYS_DURATION,
   FREE_TIME_PER_SPRINT,
+  SPLIT_BIG_TASKS,
 };

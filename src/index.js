@@ -1,31 +1,28 @@
 // Load environment variables
 require('dotenv').config()
+const path = require('path');
 
-var config = require("./config.js");
-var utils = require("./utils.js");
-var csv = require("csvtojson");
-var fs = require("fs");
-var path = require('path');
-var _ = require("lodash");
-
-async function processCSV() {
-
-  var PATH = path.resolve(config.SOURCE_PATH)
-
-  return await csv({ delimiter: config.SEPARATOR })
-    .fromFile(PATH);
-}
+const config = require("./config.js");
+const utils = require("./utils.js");
 
 async function init() {
 
   console.log(`~~~ Your planning will be ready soon...`)
 
-  const tasks = await processCSV();
+  const PATH = path.resolve(config.SOURCE_PATH);
+
+  let tasks = await utils.loadCSV(PATH);
+
+  if (config.SPLIT_BIG_TASKS === "true"){
+    console.log(`~~~ Splitting tasks`)
+    tasks = utils.splitBigTasks({tasks});
+  }
+
   const planning = utils.calculateSprints({tasks});
 
-  utils.printPlanning({planning: planning, tasks});
+  utils.printPlanning({planning, tasks});
 
-  console.log(`~~~ Hurray! Check ${config.SUCCESS_FILE_NAME} out`)
+  console.log(`~~~ Hurray! Check ${config.PLANNING_FILE_NAME} out`)
 
 }
 
