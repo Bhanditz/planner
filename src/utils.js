@@ -120,6 +120,7 @@ function printPlanning({planning, tasks}) {
 
     const sprint2tasks = _.groupBy(planning, SPRINT);
     let sprintStart = moment(config.PROJECT_START_DAY, "DD/MM/YYYY");
+    let sprintEnd;
     const thereAreUnplannedTasks = planning.length !== tasks.length;
 
     // Remove undefined key
@@ -146,11 +147,14 @@ function printPlanning({planning, tasks}) {
 
     _.forEach(sprint2tasks, function(value, key) {
 
-        const date = formatData({date: sprintStart});
-        logSuccess(`- SPRINT #${key} starts on ${date}`);
+        sprintEnd = sprintStart.clone().add(config.SPRINT_DAYS_DURATION, 'days');
+
+        const start = formatData({date: sprintStart});
+        const end = formatData({date: sprintEnd});
+        logSuccess(`- SPRINT #${key} <${start} -> ${end}>`);
 
         // Update sprintStart for next sprint
-        sprintStart = sprintStart.add(config.SPRINT_DAYS_DURATION, 'days');
+        sprintStart = sprintEnd;
 
         _.forEach(value, printTask);
 

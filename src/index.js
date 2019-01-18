@@ -7,14 +7,14 @@ const utils = require("./utils.js");
 
 async function init() {
 
-  console.log(`~~~ Your planning will be ready soon...`)
+  console.log(`~~ Your planning will be ready soon...`)
 
   const PATH = path.resolve(config.SOURCE_PATH);
 
   let tasks = await utils.loadCSV(PATH);
 
   if (config.SPLIT_BIG_TASKS === "true"){
-    console.log(`~~~ Splitting tasks`)
+    console.log(`~~~ Splitting big tasks`)
     tasks = utils.splitBigTasks({tasks});
   }
 
@@ -22,7 +22,7 @@ async function init() {
 
   utils.printPlanning({planning, tasks});
 
-  console.log(`~~~ Hurray! Check ${config.PLANNING_FILE_NAME} out`)
+  console.log(`~~ Hurray! Check ${config.PLANNING_FILE_NAME} out`)
 
 }
 
